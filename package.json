@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "small app",
+  "keywords": [
+    "bakend",
+    "nodejs"
+  ],
+  "homepage": "https://github.com/AleksandarStanisic021/webdevapp#readme",
+  "bugs": {
+    "url": "https://github.com/AleksandarStanisic021/webdevapp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleksandarStanisic021/webdevapp.git"
+  },
+  "license": "ISC",
+  "author": "mr No",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11",
+    "prettier": "^3.8.1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.1.5"
+  }
+}
