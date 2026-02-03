@@ -17,6 +17,6 @@ app.use(express.static("public"));
 
 import healtcheckrouter from './routes/healtcheck.routes.js'
 
-app.use('/api/v1/healt', healtcheckrouter);
+app.use('/api/v1/h', healtcheckrouter);
 
 export { app };
