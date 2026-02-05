@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose"; // Dodato { Schema } radi lakšeg korišćenja
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
-const videoSchema = new mongoose.Schema({
+const videoSchema = new Schema({ // Sada može samo Schema
     videoFile: {
         type: String,
         required: true,
@@ -31,7 +31,7 @@ const videoSchema = new mongoose.Schema({
         default: true,
     },
     owner: {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId, // Ovo će sada raditi
         ref: "User",
     },
 
@@ -39,4 +39,4 @@ const videoSchema = new mongoose.Schema({
 
 videoSchema.plugin(mongooseAggregatePaginate);
 
-export const Video = mongoose.model("Video1", videoSchema);  
+export const Video = mongoose.model("Video", videoSchema);

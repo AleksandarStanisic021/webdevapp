@@ -33,10 +33,10 @@ const userSchema = new mongoose.Schema({
     coverImage: {
         type: String,
     },
-    /*
-        watchHistory: [
-            { type: Schema.Types.ObjectId, ref: "Video1" },
-        ],*/
+
+    watchHistory: [
+        { type: Schema.Types.ObjectId, ref: "Video" },
+    ],
     password: {
         type: String,
         required: true,
