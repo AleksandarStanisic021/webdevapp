@@ -70,4 +70,5 @@ userSchema.methods.generateRefreshToken = function () {
         _id: this._id,
     }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
+
 export const User = mongoose.model("User", userSchema);
