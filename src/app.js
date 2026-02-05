@@ -18,7 +18,10 @@ app.use(express.urlencoded({
 app.use(express.static("public"));
 
 import healtcheckrouter from './routes/healtcheck.routes.js'
+import userRouter from './routes/user.routes.js'
 
 app.use('/api/v1/h', healtcheckrouter);
+app.use('/api/v1/users', userRouter);
+
 
 export { app };
