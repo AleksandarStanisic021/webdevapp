@@ -16,8 +16,8 @@ const registerUser = asyncHandler(async (req, res) => {
     if (existedUser) {
         throw new ApiError(404, "Wer have this one user");
     }
-    const avatarLocalPath = req.files?.avatar[0]?.path
-    const coverLocalPath = req.files?.coverImage[0]?.path
+    const avatarLocalPath = req.files?.avatar?.[0]?.path
+    const coverLocalPath = req.files?.coverImage?.[0]?.path
 
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is missing");
@@ -31,9 +31,9 @@ const registerUser = asyncHandler(async (req, res) => {
         coverImage: coverImage.url || "",
         email,
         password,
-        username: username.toLowercase()
+        username: username.toLowerCase()
     });
-    const createdUser = await user.findById(user._id);
+    const createdUser = await User.findById(user._id);
     if (!createdUser) throw new ApiError(505, "no user created!");
 
     return res
