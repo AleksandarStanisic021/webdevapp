@@ -89,9 +89,13 @@ const loginUser = asyncHandler(async (req, res) => {
         .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(new ApiResponse(200, loggedInUser, "Sucess in login"))
+
 })
 
+const loggoutUser = () => {
 
+
+}
 
 export {
     registerUser,
