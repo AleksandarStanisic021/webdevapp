@@ -10,6 +10,11 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+/**
+ * Uploads a file to Cloudinary
+ * @param {string} localFilePath - Path to the local file to upload
+ * @returns {Promise<import('cloudinary').UploadApiResponse | null>} Cloudinary upload response or null if failed
+ */
 const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) return null;

@@ -2,7 +2,10 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-
+/**
+ * Express application instance
+ * @type {import('express').Express}
+ */
 const app = express();
 
 app.use(cors({
