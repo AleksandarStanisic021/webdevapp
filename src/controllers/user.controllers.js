@@ -487,4 +487,73 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, "User logout successfully"));
 });
 
-export { registerUser, loginUser, refreshAccessToken, logoutUser };
+const changeCurrentPassword = asyncHandler(async (req, res) => {
+  const { oldPasword, newPasword } = req.body;
+
+  let user = await User.findById(req.user?._id);
+
+  const isPasswordValid = await user.isPasswordCorrrect(oldPasword);
+
+  if (!isPasswordValid) {
+    throw ApiError(404, "Invalid user password");
+  }
+  user.password = newPasword;
+  await user.save({ validateBeforeSave: false });
+
+  return res.status(200).json(new ApiResponse(200, {}, "paaaword changed"));
+});
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+  return res.status(200).json(new ApiResponse(200, req.user, "User found"));
+});
+
+const updateAccountDetails = asyncHandler(async (req, res) => {
+  const { fullname, email } = req.body;
+  if (!fullname || !email)
+    throw new ApiError(404, "email and name ar required!");
+
+  const user = await User.findByIdAndUpdate(
+    req.user?.id,
+    {
+      $set: {
+        fullname,
+        email,
+      },
+    },
+    { new: true }
+  ).select("-password -refreshtoken");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "User data succefully updated!"));
+});
+
+const updateUserAvatar = asyncHandler(async (req, res) => {
+  const avatarLocalPath = req.file?.path;
+  if (!avatarLocalPath) {
+    throw ApiError(404, "no file founded in this path");
+  }
+  const avatar = uploadOnCloudinary(avatarLocalPath);
+
+  const user = await findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set: {
+        avatar: avatar.url,
+      },
+    },
+    { new: true }
+  ).select("-passord -refreshToken");
+  res.status(200).json(new ApiResponse(200, user, "Avatar has changed"));
+});
+
+export {
+  registerUser,
+  loginUser,
+  refreshAccessToken,
+  logoutUser,
+  updateUserAvatar,
+  getCurrentUser,
+  updateAccountDetails,
+  changeCurrentPassword,
+};
